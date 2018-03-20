@@ -16,6 +16,7 @@ begin
 	$monitor($time, "a=%b, b=%b, cin=%b, sel = %b, cout=%b, out=%b\n", a,b,cin,sel,cout,out);
 end
 
+
 initial
 begin
    
@@ -25,49 +26,53 @@ begin
 		cin = test1[16];
 		sel = test1[18:17];
 		#10;
-	end
 
-
-	if(sel == 2'b00) begin
+	if(sel == 0 ) begin
 	 	if ({cout, out} !== a + b + cin) begin
 		      $display("***ERROR at time = %0d ***", $time);
 		      $display("a = %b, b = %b, sum = %b;  cin = %b, cout = %b, sel = %b",
 	               a, b, out, cin, cout, sel);
+	        $display ( "if cout cin = %b", a+b+cin);
 		      $stop;
 		    end
-		#10;
+		    #10;
+		    
 	end
 
-	if(sel == 2'b01) begin
-	 	if ({cout, out} !== {(a ^ b ^ cin), ((~a & b) | (~(a ^ b) & cin))}) begin
+	if(sel == 1) begin
+	 	if ({cout, out} !== {((~a) & b) | (b & cin) | (cin & (~a)),(a ^ b ^ cin)}) begin
 		      $display("***ERROR at time = %0d ***", $time);
 		      $display("a = %b, b = %b, diff = %b;  bin = %b, bout = %b, sel = %b",
 	               a, b, out, cin, cout, sel);
+	        $display ( "if cout, cin = %b", {((~a) & b) | (b & cin) | (cin & (~a)),(a ^ b ^ cin)});       
 		      $stop;
 		    end
+		    
 		#10;
 	end
 
-	if(sel == 2'b10) begin
+	if(sel == 2) begin
 	 	if (out !== (a & b) ) begin
 		      $display("***ERROR at time = %0d ***", $time);
 		      $display("a = %b, b = %b, out = %b;  cin = %b, cout = %b, sel = %b",
 	               a, b, out, cin, cout, sel);
+	        $display ( "if cout = %b", a&b);
 		      $stop;
 		    end
 		#10;
 	end
 
-	if(sel == 2'b11) begin
+	if(sel == 3) begin
 	 	if (out !== (a | b) ) begin
 		      $display("***ERROR at time = %0d ***", $time);
 		      $display("a = %b, b = %b, out = %b;  cin = %b, cout = %b, sel = %b",
 	               a, b, out, cin, cout, sel);
+	        $display ( "if cout = %b", a|b); 
 		      $stop;
 		    end
 		#10;
 	end
-
+end
 
 end
 endmodule
