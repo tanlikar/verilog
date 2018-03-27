@@ -40,11 +40,11 @@ begin
 	end
 
 	if(sel == 1) begin
-	 	if ({cout, out} !== a-b) begin
+	 	if ({cout, out} !== a-b-cin) begin
 		      $display("***ERROR at time = %0d ***", $time);
 		      $display("a = %b, b = %b, diff = %b;  bin = %b, bout = %b, sel = %b",
 	               a, b, out, cin, cout, sel);
-	        $display ( "if cout, cin = %b", {(a-b)});       
+	        $display ( "if cout, cin = %b", {(a-b-cin)});       
 		      $stop;
 		    end
 		    

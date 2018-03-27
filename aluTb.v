@@ -44,7 +44,7 @@ begin
 		      $display("***ERROR at time = %0d ***", $time);
 		      $display("a = %b, b = %b, diff = %b;  bin = %b, bout = %b, sel = %b",
 	               a, b, out, cin, cout, sel);
-	        $display ( "if cout, cin = %b", {(a-b-cin)});       
+	        $display ( "correct answer = %b", {(a-b-cin)});       
 		      $stop;
 		    end
 		    
@@ -54,9 +54,9 @@ begin
 	if(sel == 2) begin
 	 	if (out !== (a & b) ) begin
 		      $display("***ERROR at time = %0d ***", $time);
-		      $display("a = %b, b = %b, out = %b;  cin = %b, cout = %b, sel = %b",
+		      $display("a = %b, b = %b, AND = %b;  cin = %b, cout = %b, sel = %b",
 	               a, b, out, cin, cout, sel);
-	        $display ( "if cout = %b", a&b);
+	        $display ( "correct answer = %b", a&b);
 		      $stop;
 		    end
 		#10;
@@ -65,9 +65,9 @@ begin
 	if(sel == 3) begin
 	 	if (out !== (a | b) ) begin
 		      $display("***ERROR at time = %0d ***", $time);
-		      $display("a = %b, b = %b, out = %b;  cin = %b, cout = %b, sel = %b",
+		      $display("a = %b, b = %b, OR = %b;  cin = %b, cout = %b, sel = %b",
 	               a, b, out, cin, cout, sel);
-	        $display ( "if cout = %b", a|b); 
+	        $display ( "correct answer = %b", a|b); 
 		      $stop;
 		    end
 		#10;
